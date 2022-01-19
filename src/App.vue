@@ -1,9 +1,9 @@
 <template>
-  <div class="columns is-gapless is-multiline">
+  <main class="columns is-gapless is-multiline" :class="{'modo-escuro': modoEscuro}">
     <aside class="column is-one-quarter">
-      <barra-lateral/>
+      <barra-lateral @tema-alterado="alternarTema"/>
     </aside>
-    <main class="column is-three-quarter">
+    <section class="column is-three-quarter conteudo">
       <formulario @tarefaFinalizada="salvarTarefa"/>
       <div class="p-3">
         <tarefa v-for="(tarefa, index) in tarefas" :tarefa="tarefa" :key="index"/>
@@ -11,8 +11,8 @@
           <p>Nenhuma tarefa executada hoje :(</p>
         </div>
       </div>
-    </main>
-  </div>
+    </section>
+  </main>
 </template>
 
 <script lang="ts">
@@ -26,12 +26,30 @@ export default defineComponent({
   components: {Tarefa, Formulario, BarraLateral},
   data: () => ({
     tarefas: [] as ITarefa[],
+    modoEscuro: false,
   }),
   methods: {
     salvarTarefa(tarefa: ITarefa) {
       this.tarefas.push(tarefa)
     },
+    alternarTema(modoEscuro: boolean) {
+      this.modoEscuro = modoEscuro
+    },
   },
 });
 </script>
+
+<style>
+main {
+  --bg-primario: #fff;
+  --texto-primario: #000;
+}
+main.modo-escuro {
+  --bg-primario: #2b2d42;
+  --texto-primario: #ddd;
+}
+.conteudo {
+  background-color: var(--bg-primario);
+}
+</style>
 

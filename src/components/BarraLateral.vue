@@ -1,15 +1,28 @@
 <template>
-  <header>
+  <header class="has-text-centered">
     <h1>
       <img src="@/assets/logo.png" alt="">
     </h1>
+    <button class="button" @click="alterarTema">
+      {{ modoEscuro ? 'Desativar' : 'Ativar' }} modo escuro
+    </button>
   </header>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
 export default defineComponent({
-  name: 'BarraLateral'
+  name: 'BarraLateral',
+  emits: ['temaAlterado'],
+  data: () => ({
+    modoEscuro: false,
+  }),
+  methods: {
+    alterarTema() {
+      this.modoEscuro = !this.modoEscuro;
+      this.$emit('temaAlterado', this.modoEscuro);
+    },
+  },
 })
 </script>
 
