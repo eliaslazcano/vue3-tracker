@@ -20,6 +20,7 @@
 import Cronometro from '@/components/Cronometro.vue'
 export default {
   name: 'Temporizador',
+  emits: ['finalizado'], // Nome dos eventos que este componente possui
   components: {Cronometro},
   data: () => ({
     tempoEmSegundos: 0,
@@ -34,6 +35,7 @@ export default {
     finalizar(): void {
       clearInterval(this.cronometroId)
       this.cronometroId = 0
+      this.$emit('finalizado', this.tempoEmSegundos)
     },
   },
 }
