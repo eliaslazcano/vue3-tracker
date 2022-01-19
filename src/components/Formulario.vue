@@ -12,8 +12,9 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue'
 import Temporizador from '@/components/Temporizador.vue'
-export default {
+export default defineComponent({
   name: 'Formulario',
   emits: ['tarefaFinalizada'],
   components: {Temporizador},
@@ -27,5 +28,5 @@ export default {
       this.descricao = ''
     }
   },
-}
+})
 </script>

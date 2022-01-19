@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent } from 'vue'
 import BarraLateral from '@/components/BarraLateral.vue';
 import Formulario from '@/components/Formulario.vue';
 import Tarefa from '@/components/Tarefa.vue';

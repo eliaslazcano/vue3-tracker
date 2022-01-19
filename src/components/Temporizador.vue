@@ -17,8 +17,9 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue'
 import Cronometro from '@/components/Cronometro.vue'
-export default {
+export default defineComponent({
   name: 'Temporizador',
   emits: ['finalizado'], // Nome dos eventos que este componente possui
   components: {Cronometro},
@@ -38,5 +39,5 @@ export default {
       this.$emit('finalizado', this.tempoEmSegundos)
     },
   },
-}
+})
 </script>

@@ -12,16 +12,16 @@
 </template>
 
 <script lang="ts">
-import { PropType } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import Cronometro from '@/components/Cronometro.vue'
 import ITarefa from '@/interfaces/ITarefa'
-export default {
+export default defineComponent({
   name: 'Tarefa',
   components: {Cronometro},
   props: {
     tarefa: {type: Object as PropType<ITarefa>, required: true},
   },
-}
+})
 </script>
 
 <style scoped>
