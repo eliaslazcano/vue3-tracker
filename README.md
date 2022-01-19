@@ -1,24 +1,19 @@
 # tracker-vue3
 
-## Project setup
-```
-npm install
-```
+Projeto de desenvolvimento de uma aplicação que ficará responsável por fazer o tracking, o acompanhamento de tarefas
+diárias que executamos no dia a dia, como, por exemplo, estudar programação.
 
-### Compiles and hot-reloads for development
+## Tecnologias abordadas
+
+- VueJs 3
+- TypeScript
+
+### Executando servidor de desenvolvimento
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Compilação para produção
 ```
 npm run build
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
