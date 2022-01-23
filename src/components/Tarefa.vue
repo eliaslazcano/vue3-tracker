@@ -5,7 +5,7 @@
         {{ tarefa.descricao || 'Tarefa sem descrição' }}
       </div>
       <div class="column">
-        <cronometro :tempo-em-segundos="tarefa.duracaoEmSegundos"/>
+        <TimerDisplay :tempo-em-segundos="tarefa.duracaoEmSegundos"/>
       </div>
     </div>
   </div>
@@ -13,11 +13,11 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import Cronometro from '@/components/Cronometro.vue'
+import TimerDisplay from '@/components/TimerDisplay.vue'
 import ITarefa from '@/interfaces/ITarefa'
 export default defineComponent({
   name: 'Tarefa',
-  components: {Cronometro},
+  components: {TimerDisplay},
   props: {
     tarefa: {type: Object as PropType<ITarefa>, required: true},
   },

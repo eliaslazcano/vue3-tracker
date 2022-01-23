@@ -1,43 +1,59 @@
 <template>
-  <div class="is-flex is-align-items-center is-justify-content-space-between">
-    <cronometro :tempo-em-segundos="tempoEmSegundos"/>
-    <button class="button" @click="iniciar" :disabled="!!cronometroId">
-      <span class="icon">
-        <i class="fas fa-play"></i>
-      </span>
-      <span>Play</span>
-    </button>
-    <button class="button" @click="finalizar" :disabled="!cronometroId">
-      <span class="icon">
-        <i class="fas fa-stop"></i>
-      </span>
-      <span>Stop</span>
-    </button>
+  <div class="box formulario">
+    <div class="columns">
+      <div class="column is-5" role="form" aria-label="Formulario para criação de uma nova tarefa">
+        <input type="text" class="input" placeholder="Qual tarefa você deseja inicial?" v-model="descricao">
+      </div>
+      <div class="column is-3">
+        <div class="select">
+          <select v-model="idProjeto">
+            <option value="">Selecione o projeto</option>
+            <option v-for="projeto in projetos" :key="projeto.id" :value="projeto.id">{{projeto.nome}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="column">
+        <Cronometro @finalizado="finalizarTarefa"/>
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue'
-import Cronometro from '@/components/Cronometro.vue'
+import { defineComponent, computed } from 'vue'
+import Cronometro from '@/components/Temporizador/Cronometro.vue'
+import { useStore } from 'vuex'
+import { key } from '@/store'
 export default defineComponent({
   name: 'Temporizador',
-  emits: ['finalizado'], // Nome dos eventos que este componente possui
+  emits: ['tarefaFinalizada'],
   components: {Cronometro},
   data: () => ({
-    tempoEmSegundos: 0,
-    cronometroId: 0,
+    descricao: '',
+    idProjeto: '',
   }),
   methods: {
-    iniciar(): void {
-      if (this.cronometroId === 0) {
-        this.cronometroId = setInterval(() => this.tempoEmSegundos += 1, 1000)
-      }
-    },
-    finalizar(): void {
-      clearInterval(this.cronometroId)
-      this.cronometroId = 0
-      this.$emit('finalizado', this.tempoEmSegundos)
-    },
+    finalizarTarefa(tempoDecorrido: number): void {
+      this.$emit('tarefaFinalizada', {
+        duracaoEmSegundos: tempoDecorrido,
+        descricao: this.descricao,
+        projeto: this.projetos.find(proj => proj.id == this.idProjeto)
+      })
+      this.descricao = ''
+    }
+  },
+  setup() {
+    const store = useStore(key)
+    return {
+      projetos: computed(() => store.state.projetos)
+    }
   },
 })
 </script>
+
+<style>
+.formulario {
+  color: var(--texto-primario);
+  background-color: var(--bg-primario);
+}
+</style>

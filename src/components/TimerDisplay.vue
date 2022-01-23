@@ -5,7 +5,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 export default defineComponent({
-  name: 'Cronometro',
+  name: 'TimerDisplay',
   props: {
     tempoEmSegundos: { type: Number, default: 0 },
   },
