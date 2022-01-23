@@ -28,23 +28,27 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue'
-import IProjeto from '@/interfaces/IProjeto';
+import {computed, defineComponent} from 'vue'
+import {useStore} from 'vuex'
+import {key} from '@/store'
 export default defineComponent({
   name: 'Projetos',
   data: () => ({
     iptNomeDoProjeto: '',
-    projetos: [] as IProjeto[],
   }),
   methods: {
-    salvarProjeto() {
-      const projeto: IProjeto = {
-        id: new Date().toISOString(),
-        nome: this.iptNomeDoProjeto.trim()
-      }
-      this.projetos.push(projeto)
+    salvarProjeto(): void {
+      this.store.commit('ADICIONA_PROJETO', this.iptNomeDoProjeto)
       this.iptNomeDoProjeto = ''
     },
+  },
+  setup() {
+    //Esta funcao setup() executa durante a criação do componente, por aqui é possível criar os tradicionais data, methods, computed e etc.
+    const store = useStore(key)
+    return {
+      projetos: computed(() => store.state.projetos), //Por que nao usei apenas 'store.state.projetos'? Este valor pode sofrer alteracoes em tempo de execucao, portanto ele sera criado como uma computed property
+      store: store
+    }
   },
 })
 </script>

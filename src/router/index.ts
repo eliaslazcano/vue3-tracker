@@ -1,15 +1,17 @@
 import {createRouter, createWebHashHistory} from 'vue-router';
+import Tarefas from '@/views/Tarefas.vue';
+import Projetos from '@/views/Projetos.vue';
 
 const routes = [
   {
     path: '/',
     name: 'Tarefas',
-    component: import('@/views/Tarefas.vue')
+    component: Tarefas
   },
   {
     path: '/projetos',
     name: 'Projetos',
-    component: import('@/views/Projetos.vue')
+    component: Projetos
   }
 ]
 
