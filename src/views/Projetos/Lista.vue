@@ -22,6 +22,11 @@
               <i class="fas fa-pencil-alt"></i>
             </span>
         </router-link>
+        <button class="button ml-2 is-danger" @click="excluirProjeto(projeto.id)">
+          <span class="icon is-small">
+            <i class="fas fa-trash"></i>
+          </span>
+        </button>
       </td>
     </tr>
     </tbody>
@@ -34,10 +39,16 @@ import { useStore } from 'vuex'
 import { key } from '@/store'
 export default defineComponent({
   name: 'Lista',
+  methods: {
+    excluirProjeto(id: string) {
+      this.store.commit('DELETAR_PROJETO', id)
+    },
+  },
   setup() {
     const store = useStore(key)
     return {
-      projetos: computed(() => store.state.projetos)
+      projetos: computed(() => store.state.projetos),
+      store
     }
   },
 })
