@@ -6,15 +6,17 @@
     <section class="column is-three-quarter conteudo">
       <router-view></router-view>
     </section>
+    <Notificacoes />
   </main>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import BarraLateral from '@/components/BarraLateral.vue';
+import Notificacoes from '@/components/Notificacoes.vue';
 export default defineComponent({
   name: 'App',
-  components: {BarraLateral},
+  components: {Notificacoes, BarraLateral},
   data: () => ({
     modoEscuro: false,
   }),

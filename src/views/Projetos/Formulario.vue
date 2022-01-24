@@ -15,7 +15,8 @@ import { defineComponent, ref } from 'vue'
 import { useStore } from 'vuex'
 import { key } from '@/store'
 import IProjeto from '@/interfaces/IProjeto';
-import {ADICIONA_PROJETO, ATUALIZA_PROJETO} from '@/store/mutation-types';
+import {ADICIONA_PROJETO, ATUALIZA_PROJETO, NOTIFICAR} from '@/store/mutation-types';
+import {TipoNotificacao} from '@/interfaces/INotificacao';
 export default defineComponent({
   name: 'Formulario',
   props: {
@@ -30,6 +31,11 @@ export default defineComponent({
         this.store.commit(ADICIONA_PROJETO, this.iptNomeDoProjeto)
       }
       this.iptNomeDoProjeto = ''
+      this.store.commit(NOTIFICAR, {
+        titulo: 'Novo projeto adicionado',
+        texto: 'Seu projeto já está disponível ;)',
+        tipo: TipoNotificacao.SUCESSO
+      })
       this.$router.push('/projetos')
     },
   },
