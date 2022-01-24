@@ -16,15 +16,14 @@ import {useStore} from 'vuex'
 import {key} from '@/store'
 import IProjeto from '@/interfaces/IProjeto';
 import {ADICIONA_PROJETO, ATUALIZA_PROJETO} from '@/store/mutation-types';
-import {notificacaoMixin} from '@/mixins/notificar';
 import {TipoNotificacao} from '@/interfaces/INotificacao';
+import notificador from '@/hooks/notificador'
 
 export default defineComponent({
   name: 'Formulario',
   props: {
     id: { type: String }
   },
-  mixins: [notificacaoMixin],
   methods: {
     salvarProjeto(): void {
       if (this.id) {
@@ -41,8 +40,10 @@ export default defineComponent({
   setup(props) {
     const store = useStore(key)
     const iptNomeDoProjeto = ref(props.id ? store.state.projetos.find(proj => proj.id == props.id)?.nome || '' : '')
+    const {notificar} = notificador()
     return {
       iptNomeDoProjeto,
+      notificar,
       store
     }
   },
