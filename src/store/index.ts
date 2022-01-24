@@ -1,6 +1,7 @@
 import IProjeto from '@/interfaces/IProjeto'
 import {createStore, Store} from 'vuex'
 import {InjectionKey} from 'vue'
+import { ADICIONA_PROJETO, ATUALIZA_PROJETO, DELETAR_PROJETO } from '@/store/mutation-types'
 
 interface Estado {
   projetos: IProjeto[],
@@ -15,15 +16,15 @@ export const store = createStore<Estado>({
     ],
   },
   mutations: {
-    'ADICIONA_PROJETO'(state, nomeDoProjeto: string) {
+    [ADICIONA_PROJETO](state, nomeDoProjeto: string) {
       const projeto = {id: new Date().toISOString(), nome: nomeDoProjeto} as IProjeto
       state.projetos.push(projeto)
     },
-    'ATUALIZA_PROJETO'(state, projeto: IProjeto) {
+    [ATUALIZA_PROJETO](state, projeto: IProjeto) {
       const index = state.projetos.findIndex(proj => proj.id == projeto.id)
       if (index != -1) state.projetos[index] = projeto
     },
-    'DELETAR_PROJETO'(state, id) {
+    [DELETAR_PROJETO](state, id) {
       state.projetos = state.projetos.filter(proj => proj.id != id)
     },
   },

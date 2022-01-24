@@ -37,11 +37,12 @@
 import { computed, defineComponent } from 'vue'
 import { useStore } from 'vuex'
 import { key } from '@/store'
+import { DELETAR_PROJETO } from '@/store/mutation-types';
 export default defineComponent({
   name: 'Lista',
   methods: {
     excluirProjeto(id: string) {
-      this.store.commit('DELETAR_PROJETO', id)
+      this.store.commit(DELETAR_PROJETO, id)
     },
   },
   setup() {

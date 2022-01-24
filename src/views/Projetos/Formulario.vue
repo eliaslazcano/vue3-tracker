@@ -15,6 +15,7 @@ import { defineComponent, ref } from 'vue'
 import { useStore } from 'vuex'
 import { key } from '@/store'
 import IProjeto from '@/interfaces/IProjeto';
+import {ADICIONA_PROJETO, ATUALIZA_PROJETO} from '@/store/mutation-types';
 export default defineComponent({
   name: 'Formulario',
   props: {
@@ -24,9 +25,9 @@ export default defineComponent({
     salvarProjeto(): void {
       if (this.id) {
         const projeto = {id: this.id, nome: this.iptNomeDoProjeto} as IProjeto
-        this.store.commit('ATUALIZA_PROJETO', projeto)
+        this.store.commit(ATUALIZA_PROJETO, projeto)
       } else {
-        this.store.commit('ADICIONA_PROJETO', this.iptNomeDoProjeto)
+        this.store.commit(ADICIONA_PROJETO, this.iptNomeDoProjeto)
       }
       this.iptNomeDoProjeto = ''
       this.$router.push('/projetos')
