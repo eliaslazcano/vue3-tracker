@@ -6,6 +6,7 @@ diárias que executamos no dia a dia, como, por exemplo, estudar programação.
 ## Tecnologias abordadas
 
 - VueJs 3
+- Vuex 4
 - TypeScript
 
 ### Executando servidor de desenvolvimento
