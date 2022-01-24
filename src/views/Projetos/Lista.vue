@@ -38,17 +38,22 @@ import { computed, defineComponent } from 'vue'
 import { useStore } from 'vuex'
 import { key } from '@/store'
 import { DELETAR_PROJETO } from '@/store/mutation-types';
+import notificador from '@/hooks/notificador';
+import {TipoNotificacao} from '@/interfaces/INotificacao';
 export default defineComponent({
   name: 'Lista',
   methods: {
     excluirProjeto(id: string) {
       this.store.commit(DELETAR_PROJETO, id)
+      this.notificar(TipoNotificacao.FALHA, 'Deletado!', 'O projeto foi apagado!')
     },
   },
   setup() {
     const store = useStore(key)
+    const {notificar} = notificador()
     return {
       projetos: computed(() => store.state.projetos),
+      notificar,
       store
     }
   },

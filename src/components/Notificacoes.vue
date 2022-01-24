@@ -29,8 +29,12 @@ export default defineComponent({
 <style scoped>
 .notificacoes {
   position: fixed;
-  right: 0;
-  width: 300px;
-  padding: 8px;
+  right: 1rem;
+  bottom: 1rem;
+  width: 24rem;
+}
+.notificacoes article {
+  box-shadow: 1px 1px 3px rgba(0,0,0,.25);
+  margin-bottom: .75rem;
 }
 </style>
